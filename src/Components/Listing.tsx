@@ -1,12 +1,15 @@
 import {Item} from "../Models/ListingModels"
 
 export default function Listing(props: {items: Item[]}) {
-    const {items} = props;
+    let {items} = props;
+    items = items.filter((item) => {
+        return item.state !== "removed";
+    });
 
     return (
         <div className="item-list">
             {items.map((item) => (
-                <div className="item">
+                <div key={item.listing_id} className="item">
                     <div className="item-image">
                         <a href={item.url}>
                             <img src={item.MainImage.url_570xN}></img>
